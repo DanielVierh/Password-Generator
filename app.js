@@ -6,8 +6,11 @@ const numberOpt = document.getElementById("numSection");
 const specialChar = document.getElementById("specSection");
 const checkboxNumbers = document.getElementById("numbers");
 const checkboxSpecials = document.getElementById("specialChar");
+const copyButtonIcon = document.getElementById("copyBtnIcon");
+const copyButton = document.getElementById("copyButton");
 let txtIterator = 0;
 let txtPsw = '';
+
 generateButton.addEventListener("click", createPassw);
 checkFieldReadable.addEventListener("change", blendInOutOptions = () => {
     if (checkFieldReadable.checked === true) {
@@ -78,7 +81,12 @@ function createPassw() {
             }
         }
     }
-// debugger
+
+    // Das Copy Logo anzeigen
+    copyButtonIcon.classList.remove('fa-check');
+    copyButton.classList.remove('active');
+    copyButtonIcon.classList.add('fa-copy');
+
     outputField.value = '';
     txtIterator = 0;
     txtPsw = psw;
@@ -93,5 +101,14 @@ function typeAnimation() {
         outputField.value += txtPsw.charAt(txtIterator);
         txtIterator++;
         setTimeout(typeAnimation, 50);
+    }
+}
+
+function copyPsw() {
+    if(outputField.value != '') {
+        navigator.clipboard.writeText(outputField.value);
+        copyButtonIcon.classList.remove('fa-copy');
+        copyButtonIcon.classList.add('fa-check');
+        copyButton.classList.add('active');
     }
 }

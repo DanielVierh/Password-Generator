@@ -39,18 +39,6 @@ body{
     padding: 10px;
 }
 
-
-.outputlabel{
-    margin: 35px;
-    width: 100%;
-    height: 40px;
-    border-radius: 10px;
-    text-align: center;
-    font-weight: bold;
-    font-size: 1.2rem;
-
-}
-
 .btn{
     margin: 30px;
     padding: 15px;
@@ -60,6 +48,11 @@ body{
     font-weight: bold;
     background-color: chartreuse;
     box-shadow: 5px 5px 15px black;
+    transition: 0.1s ease-in;
+}
+
+.btn:active{
+    transform: scale(0.9);
 }
 
 .lenthField{
@@ -68,4 +61,47 @@ body{
     font-weight: bold;
     font-size: 1rem;
     border-radius: 7px;
+}
+
+
+.outputCopyDiv{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    margin: 0;
+}
+
+.outputlabel{
+    margin-top: 35px;
+    width: 80%;
+    height: 40px;
+    border-radius:  10px 0 0 10px;
+    text-align: center;
+    font-weight: bold;
+    font-size: 1rem;
+    border:0;
+}
+
+.copyButton{
+    width: 20%;
+    height: 42px;
+    padding: 0;
+    margin-top: 35px;
+    border-radius:  0 10px 10px 0;
+    border:0;
+    font-size: 1.3rem;
+    background-color: rgba(34, 36, 48, 0.658);
+    transition: 0.1s ease-in-out;
+    color: white;
+}
+
+.copyButton.active{
+    transition: 0.5s ease;
+    box-shadow: 0 0 15px lightgreen;
+    background-color: lightgreen;
+    color: green;
+}
+
+.copyButton:active{
+    transform: scale(0.8);
 }
