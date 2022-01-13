@@ -110,6 +110,8 @@ function copyPsw() {
         copyButtonIcon.classList.add('fa-check');
         copyButton.classList.add('active');
         createNotification('Passwort wurde kopiert','success')
+    }else{
+        createNotification('Du hast noch kein Passwort erstellt. Klicke zuerst auf "Create Password"','warning')
     }
 }
 
