@@ -105,3 +105,44 @@ body{
 .copyButton:active{
     transform: scale(0.8);
 }
+
+
+/* ############################### */
+
+/* Toastnotification */
+#toasts{
+    position: fixed;
+    bottom: 10px;
+    right: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    border-radius: 15px;
+    max-height: 200px;
+    overflow-y: auto;
+    transition: transform 0.4s ease;
+}
+
+/* Nachrichtenbox (Toast) Styling */
+.toast{
+    border-radius:  20px 20px 0 20px ;
+    padding: 1rem 2rem;
+    margin: .5rem;
+    font-weight: bold;
+    opacity: 0.7;
+}
+
+.toast.alert{
+    background-color: rgb(105, 6, 6);
+    color: white;
+}
+
+.toast.success{
+    background-color: lightgreen;
+    color: black;
+}
+
+.toast.info{
+    background-color: lightblue;
+    color: black;
+}

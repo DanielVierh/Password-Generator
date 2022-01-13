@@ -15,7 +15,7 @@
         <div class="options">
             <p id="numSection">
                 <label for="numbers">Numbers</label>
-                <input type="checkbox" id="numbers">
+                <input type="checkbox" id="numbers" checked>
             </p>
             <p id="specSection">
                 <label for="specialChar">Special #!?{}$</label>
@@ -27,7 +27,7 @@
             </p>
             <p>
                 <label for="pswLength">Length</label>
-                <input type="text" id="pswLength" class="lenthField" value="8">
+                <input type="number" id="pswLength" class="lenthField" value="12" step="1" min="8" max="30">
             </p>
         </div>
 
@@ -38,6 +38,10 @@
 
         <button class="btn" id="generateBtn"><i class="fas fa-key"></i> Create Password </button>
     </div>
+
+    <footer>
+        <div id="toasts"></div>
+    </footer>
 
     <script src="./app.js"></script>
 </body>

@@ -39,47 +39,47 @@ function createPassw() {
     const numbers = ["1", "2", "3", "4", "5", "6", "7", "8", "9"];
     let random = (min, max) => Math.floor(Math.random() * (max - min)) + min;
 
-    // Readable Passwort
-    if (isReadable === true) {
-        if (pswLength >= 4) {
+
+    if (pswLength >= 8) {
+        if (isReadable === true) {
+                psw += bigLetters2[Math.floor(Math.random() * bigLetters2.length)];
+                let isVoc = false;
+                for (let i = 0; i < pswLength - 1; i++) {
+                    if (isVoc === true) {
+                        isVoc = false;
+                        psw += smalLetters[Math.floor(Math.random() * smalLetters.length)];
+                    } else {
+                        isVoc = true;
+                        psw += vokals[Math.floor(Math.random() * vokals.length)];
+                    }
+                }
+        } else {
+            // Erster Buchstabe ist immer gross
             psw += bigLetters2[Math.floor(Math.random() * bigLetters2.length)];
-            let isVoc = false;
             for (let i = 0; i < pswLength - 1; i++) {
-                if (isVoc === true) {
-                    isVoc = false;
+                // Generiert eine Zufallszahl von 0 - 3
+                let rnd = parseInt(Math.random() * 3);
+                // Passwort soll Zahlen enthalten
+                if (rnd === 0 && checkboxNumbers.checked === true) {
+                    psw += numbers[Math.floor(Math.random() * numbers.length)];
+                } else if (rnd === 0 && checkboxNumbers.checked === false) {
                     psw += smalLetters[Math.floor(Math.random() * smalLetters.length)];
-                } else {
-                    isVoc = true;
-                    psw += vokals[Math.floor(Math.random() * vokals.length)];
+                }
+
+                // Passwort soll SpecialChars enthaöten
+                if (rnd === 1 && checkboxSpecials.checked === true) {
+                    psw += spezials[Math.floor(Math.random() * spezials.length)];
+                } else if (rnd === 1 && checkboxSpecials.checked === false) {
+                    psw += bigLetters2[Math.floor(Math.random() * bigLetters2.length)];
+                }
+                // Kleine Buchstaben
+                if (rnd === 2) {
+                    psw += smalLetters[Math.floor(Math.random() * smalLetters.length)];
                 }
             }
-        } else {
-            alert("Password is too short")
         }
-    } else {
-        // Erster Buchstabe ist immer gross
-        psw += bigLetters2[Math.floor(Math.random() * bigLetters2.length)];
-        for (let i = 0; i < pswLength - 1; i++) {
-            // Generiert eine Zufallszahl von 0 - 3
-            let rnd = parseInt(Math.random() * 3);
-            // Passwort soll Zahlen enthalten
-            if (rnd === 0 && checkboxNumbers.checked === true) {
-                psw += numbers[Math.floor(Math.random() * numbers.length)];
-            } else if (rnd === 0 && checkboxNumbers.checked === false) {
-                psw += smalLetters[Math.floor(Math.random() * smalLetters.length)];
-            }
-
-            // Passwort soll SpecialChars enthaöten
-            if (rnd === 1 && checkboxSpecials.checked === true) {
-                psw += spezials[Math.floor(Math.random() * spezials.length)];
-            } else if (rnd === 1 && checkboxSpecials.checked === false) {
-                psw += bigLetters2[Math.floor(Math.random() * bigLetters2.length)];
-            }
-            // Kleine Buchstaben
-            if (rnd === 2) {
-                psw += smalLetters[Math.floor(Math.random() * smalLetters.length)];
-            }
-        }
+    }else{
+        createNotification('Das Passwort ist zu kurz. Es sollte mindestens 8 Zeichen lang sein.','alert')
     }
 
     // Das Copy Logo anzeigen
@@ -91,7 +91,6 @@ function createPassw() {
     txtIterator = 0;
     txtPsw = psw;
     typeAnimation();
-
 }
 
 
@@ -110,5 +109,29 @@ function copyPsw() {
         copyButtonIcon.classList.remove('fa-copy');
         copyButtonIcon.classList.add('fa-check');
         copyButton.classList.add('active');
+        createNotification('Passwort wurde kopiert','success')
     }
 }
+
+
+
+// Toast Notification
+const toasts = document.getElementById('toasts');
+function createNotification(message, messageType) {
+    // Erstelle Div
+    const notifi = document.createElement('div');
+    // Füge Klasse hinzu
+    notifi.classList.add('toast'); // Messagebox
+    notifi.classList.add(messageType); // Messagetypes: alert, info, modal, warning, success
+    // Textmessage hinzufügen
+    notifi.innerText = message;
+    // Dem Toastcontainer das erstelle Toast hinzufügen
+    toasts.appendChild(notifi);
+
+    // Nachricht nach festgelegter Zeit wieder entfernen
+    setTimeout(() => {
+        notifi.remove();
+    }, 6000);
+}
+
+createNotification('Erstelle Dein Passwort mit einem einfachen Klick :)','info')
